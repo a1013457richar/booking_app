@@ -5,12 +5,26 @@ export default function ImageUploadSection() {
   const {
     register,
     formState: { errors },
+    watch,
+    setValue,
   } = useFormContext<HotelFormData>();
+  const existingImageUrls = watch("imageUrls");
+
+  const handleDelete = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    url: string
+  ) => {
+    event.preventDefault();
+    setValue(
+      "imageUrls",
+      existingImageUrls?.filter((u) => u !== url)
+    );
+  };
   return (
     <div>
       <h2 className="text-2xl font-bold mb-3">Images</h2>
       <div className="border rounded p-4 flex flex-col gap-4">
-      {/* {existingImageUrls && (
+        {existingImageUrls && (
           <div className="grid grid-cols-6 gap-4">
             {existingImageUrls.map((url) => (
               <div className="relative group">
@@ -24,8 +38,8 @@ export default function ImageUploadSection() {
               </div>
             ))}
           </div>
-        )} */}
-       
+        )}
+
         <input
           type="file"
           multiple
@@ -33,9 +47,8 @@ export default function ImageUploadSection() {
           className="w-full text-gray-700 font-normal"
           {...register("imageFiles", {
             validate: (files) => {
-                const totalLength =
-                files.length 
-                // + (existingImageUrls?.length || 0);
+              const totalLength =
+                files.length + (existingImageUrls?.length || 0);
 
               if (totalLength === 0) {
                 return "Please upload at least 1 image";
@@ -52,8 +65,6 @@ export default function ImageUploadSection() {
           {errors.imageFiles.message}
         </span>
       )}
-        
-    
     </div>
   );
 }

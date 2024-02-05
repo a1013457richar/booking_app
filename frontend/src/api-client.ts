@@ -2,7 +2,7 @@ import { HotelType } from "../../backend/src/shared/types";
 import { RegisterForm } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
 
-const API_URL = import.meta.env.VITE_API_URL ||'';
+const API_URL = import.meta.env.VITE_API_URL || "";
 
 export const register = async (formData: RegisterForm) => {
   const response = await fetch(`${API_URL}/api/users/register`, {
@@ -20,7 +20,7 @@ export const register = async (formData: RegisterForm) => {
   }
 };
 
-export const signIn= async (formData: SignInFormData) => {
+export const signIn = async (formData: SignInFormData) => {
   const response = await fetch(`${API_URL}/api/auth/login`, {
     method: "POST",
     credentials: "include",
@@ -35,7 +35,7 @@ export const signIn= async (formData: SignInFormData) => {
     throw new Error(data.message);
   }
   return data;
-}
+};
 
 export const validateToken = async () => {
   const response = await fetch(`${API_URL}/api/auth/validate-token`, {
@@ -48,7 +48,7 @@ export const validateToken = async () => {
 };
 
 export const signOut = async () => {
-  const response=await fetch(`${API_URL}/api/auth/logout`, {
+  const response = await fetch(`${API_URL}/api/auth/logout`, {
     method: "POST",
     credentials: "include",
   });
@@ -56,8 +56,7 @@ export const signOut = async () => {
   if (!response.ok) {
     throw new Error("Invalid Token");
   }
-
-}
+};
 
 export const addHotel = async (hotelFormData: FormData) => {
   const response = await fetch(`${API_URL}/api/my-hotels`, {
@@ -66,16 +65,14 @@ export const addHotel = async (hotelFormData: FormData) => {
     body: hotelFormData,
   });
 
-  
   if (!response.ok) {
     throw new Error("failed to add hotel");
   }
-  
+
   return response.json();
+};
 
-}
-
-export const getHotels = async ():Promise<HotelType[]> => {
+export const getHotels = async (): Promise<HotelType[]> => {
   const response = await fetch(`${API_URL}/api/my-hotels`, {
     credentials: "include",
   });
@@ -85,6 +82,32 @@ export const getHotels = async ():Promise<HotelType[]> => {
   }
 
   return response.json();
-}
+};
 
+export const fetchHotelById = async (hotelId: string): Promise<HotelType[]> => {
+  const response = await fetch(`${API_URL}/api/my-hotels/${hotelId}`, {
+    credentials: "include",
+  });
 
+  if (!response.ok) {
+    throw new Error("failed to get hotel");
+  }
+
+  return response.json();
+};
+
+export const updateHotel = async (hotelFormData: FormData) => {
+  const response = await fetch(
+    `${API_URL}/api/my-hotels/${hotelFormData.get("hotelId")}`,
+    {
+      method: "PUT",
+      credentials: "include",
+      body: hotelFormData,
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("failed to update hotel");
+  }
+  return response.json();
+};
