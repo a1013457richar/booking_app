@@ -6,7 +6,6 @@ import Hotel from "../models/hotel";
 import verifyToken from "../middleware/auth";
 import { body } from "express-validator";
 
-
 const router = express.Router();
 
 const storage = multer.memoryStorage();
@@ -57,6 +56,18 @@ router.post(
     }
   }
 );
+
+router.get("/", verifyToken, async (req: Request, res: Response) => {
+  try {
+    
+    
+    const hotels = await Hotel.find({ userId: req.userId });
+    res.json(hotels);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+});
 
 async function uploadImages(imageFiles: Express.Multer.File[]) {
   const uploadPromises = imageFiles.map(async (image) => {

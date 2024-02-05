@@ -1,9 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import Register from "./pages/Register";
 import SignIn from "./pages/SignIn";
 import AddHotels from "./pages/AddHotels";
 import { useAppContext } from "./contexts/AppContext";
+import MyHotels from "./pages/MyHotels";
 
 const App = () => {
   const { isLogin } = useAppContext();
@@ -53,14 +54,6 @@ const App = () => {
                 </Layout>
               }
             />
-            {/* <Route
-              path="/edit-hotel/:hotelId"
-              element={
-                <Layout>
-                  <EditHotel />
-                </Layout>
-              }
-            />
             <Route
               path="/my-hotels"
               element={
@@ -69,6 +62,15 @@ const App = () => {
                 </Layout>
               }
             />
+            {/* <Route
+              path="/edit-hotel/:hotelId"
+              element={
+                <Layout>
+                  <EditHotel />
+                </Layout>
+              }
+            />
+            
             <Route
               path="/my-bookings"
               element={
@@ -77,8 +79,10 @@ const App = () => {
                 </Layout>
               }
             /> */}
+
           </>
         )}
+         <Route path="*" element={<Navigate to="/" />} />
 
       </Routes>
     </Router>
