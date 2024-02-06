@@ -43,7 +43,7 @@ test("should show hotel detail", async ({ page }) => {
 test("should book hotel", async ({ page }) => {
   await page.goto(UI_URL);
 
-  await page.getByPlaceholder("Where are you going?").fill("Test City");
+  await page.getByPlaceholder("Where are you going?").fill("Test Country");
 
   const date = new Date();
   date.setDate(date.getDate() + 3);
