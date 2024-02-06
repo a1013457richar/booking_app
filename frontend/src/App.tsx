@@ -9,6 +9,7 @@ import EditHotel from "./pages/EditHotel";
 import Search from "./pages/Search";
 import Detial from "./pages/Detial";
 import Booking from "./pages/Booking";
+import MyBooking from "./pages/My-booking";
 
 const App = () => {
   const { isLogin } = useAppContext();
@@ -90,16 +91,16 @@ const App = () => {
                 </Layout>
               }
             />
-            {/* 
+            
             
             <Route
               path="/my-bookings"
               element={
                 <Layout>
-                  <MyBookings />
+                  <MyBooking />
                 </Layout>
               }
-            /> */}
+            />
 
           </>
         )}

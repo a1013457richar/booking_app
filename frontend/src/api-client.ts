@@ -227,3 +227,15 @@ export const createBooking = async (formData:BookingFormData) => {
   
 
 }
+
+export const fetchMyBookings = async () => {
+  const response = await fetch(`${API_URL}/api/bookings`, {
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Error fetching bookings");
+  }
+
+  return response.json();
+}
