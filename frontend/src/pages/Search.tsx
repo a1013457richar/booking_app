@@ -58,7 +58,7 @@ const Search = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const hotelFacilites = event.target.value;
-    setSelectedHotelTypes((facilites) =>
+    setSelectedFacilities((facilites) =>
       event.target.checked
         ? [...facilites, hotelFacilites]
         : facilites.filter((hotelTypes) => hotelTypes !== hotelFacilites)

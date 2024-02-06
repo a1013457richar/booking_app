@@ -84,7 +84,7 @@ export const SearchBar = () => {
       <div>
         <DatePicker
           selected={checkOut}
-          onChange={(date: Date) => setCheckIn(date)}
+          onChange={(date: Date) => setCheckOut(date)}
           selectsStart
           startDate={checkIn}
           endDate={checkOut}
