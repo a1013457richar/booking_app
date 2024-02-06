@@ -2,8 +2,10 @@ import { useMutation } from "react-query";
 import ManageHotelsForm from "../form/ManageHotelForm/ManageHotelsForm";
 import { useAppContext } from "../contexts/AppContext";
 import * as apiClient from "../api-client";
+import { useNavigate } from "react-router-dom";
 
 const AddHotels = () => {
+  const navigate = useNavigate();
   const { showToast } = useAppContext();
   const { mutate, isLoading } = useMutation(apiClient.addHotel, {
     onSuccess: () => {
@@ -11,6 +13,7 @@ const AddHotels = () => {
         message: "Hotel added successfully",
         type: "SUCCESS",
       });
+      navigate("/my-hotels");
     },
     onError: () => {
       showToast({
